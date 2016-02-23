@@ -21,8 +21,6 @@ import com.parrot.arsdk.ARSDK;
 
 public class MainActivity extends Activity {
 
-	//ARSDK.loadSDKLibs();
-
 	private DatabaseHandler mDBHandler;
 	private Button _search	,_reserve,_unreserve;
 	private EditText _field;
@@ -37,6 +35,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		ARSDK.loadSDKLibs();
 
 		mDBHandler = new DatabaseHandler(this);
 		_search = (Button) findViewById(R.id.button1);
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 			}
 
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (_field.getText().toString().isEmpty()) {
+				if (_field.getText().toString().isEmpty() || Integer.parseInt(_field.getText().toString()) > 9) {
 					return;
 				}
 				getStatusOfSpace(Integer.parseInt(_field.getText().toString()));
